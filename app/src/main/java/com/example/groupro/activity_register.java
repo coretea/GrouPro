@@ -12,6 +12,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,13 +32,14 @@ public class activity_register extends AppCompatActivity implements View.OnClick
     EditText et_fullname;
     EditText et_pass;
     Button btn_signup;
-
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthStateListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
+        mAuth = FirebaseAuth.getInstance();
         db = FirebaseDatabase.getInstance();
         myRef = db.getReference();
         et_email = (EditText)findViewById(R.id.et_email);
@@ -53,51 +58,39 @@ public class activity_register extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View view) {
-
-        if(et_fullname.getText().toString().trim().length()== 0 || et_email.getText().toString().trim().length() == 0 ||
-                et_pass.getText().toString().trim().length() == 0)
-        {
-            Toast.makeText(this, "You must enter credentials to sign up!", Toast.LENGTH_LONG).show();
-            finish();
-            onBackPressed();
-            return;
-        }
-
+        String email = et_email.getText().toString();
+        String pwd = et_pass.getText().toString();
         final String name = et_fullname.getText().toString();
-        final String email = et_email.getText().toString();
-        final String password = et_pass.getText().toString();
-
-
-        Query q = myRef.child("users").orderByValue();
-        q.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                boolean userAlreadyExists = false;
-                for (DataSnapshot dst: dataSnapshot.getChildren())
-                {
-                    User u = dst.getValue(User.class);
-                    if (email.equals(u.getEmail()))
-                    {
-                        Toast.makeText(activity_register.this, "E-mail already registered!", Toast.LENGTH_LONG).show();
-                        userAlreadyExists = true;
+        if(email.isEmpty()){
+            et_email.setError("Please enter email id");
+            et_email.requestFocus();
+        }
+        else  if(pwd.isEmpty()){
+            et_pass.setError("Please enter your password");
+            et_pass.requestFocus();
+        }
+        else  if(name.isEmpty()){
+                et_fullname.setError("Please enter your full name");
+                et_fullname.requestFocus();
+        }
+        else  if(!(email.isEmpty() && pwd.isEmpty() && name.isEmpty())){
+            mAuth.createUserWithEmailAndPassword(email, pwd).addOnCompleteListener(activity_register.this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if(!task.isSuccessful()){
+                        Toast.makeText(activity_register.this,"Sign Up was unsuccessful, Please Try Again",Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(activity_register.this,"Welcome, "+name,Toast.LENGTH_SHORT).show();
+                        finish();
+                        onBackPressed();
                     }
                 }
-                if (userAlreadyExists == false)
-                {
-                    register_user(email, name, password, dataSnapshot.getChildrenCount());
-                    Toast.makeText(activity_register.this, "Welcome to GrouPro, "+name, Toast.LENGTH_LONG).show();
-                    finish();
-                    onBackPressed();
-                    return;
-                }
-            }
+            });
+        }
+        else{
+            Toast.makeText(activity_register.this,"Error Occurred!",Toast.LENGTH_SHORT).show();
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-
+        }
     }
 }

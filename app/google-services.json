@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "206650196513-4ecloif4ggut23ehkd71evepnvr3r2ae.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.groupro",
+            "certificate_hash": "dd10a76b02e0cf62d3fb40394b32e5345d6bc820"
+          }
+        },
+        {
           "client_id": "206650196513-lcha1r6jgoeausi6veqq85d59nuhag68.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

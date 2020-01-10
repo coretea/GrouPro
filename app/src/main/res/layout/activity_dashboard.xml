@@ -101,7 +101,9 @@
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/card_projects"
-        app:layout_constraintVertical_bias="0.167" />
+        app:layout_constraintVertical_bias="0.167">
+
+    </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_assignments"
@@ -172,5 +174,13 @@
             android:layout_gravity="bottom|center"
             android:text="My Projects" />
     </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/iv_logout"
+        android:layout_width="38dp"
+        android:layout_height="53dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        card_view:srcCompat="@drawable/logout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
