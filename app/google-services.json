@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "206650196513",
+    "firebase_url": "https://groupro-dcf0b.firebaseio.com",
+    "project_id": "groupro-dcf0b",
+    "storage_bucket": "groupro-dcf0b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:206650196513:android:e3fbe70660e113ef8c5960",
+        "android_client_info": {
+          "package_name": "com.example.groupro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "206650196513-lcha1r6jgoeausi6veqq85d59nuhag68.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.groupro",
+            "certificate_hash": "a1d7644038581b64c02b4dfd71f38fefbb1839fa"
+          }
+        },
+        {
+          "client_id": "206650196513-lcjv3coure5r7fgmfrlgpm95q69dvejd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpb4_qbR_IFMh4q4S915mgdaBS2cmFZfU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "206650196513-lcjv3coure5r7fgmfrlgpm95q69dvejd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
