@@ -3,11 +3,14 @@ package com.example.groupro;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class activity_dashboard extends AppCompatActivity {
 
@@ -32,11 +35,17 @@ public class activity_dashboard extends AppCompatActivity {
         CardView card_due = (CardView) findViewById(R.id.card_due); // creating a CardView and assigning a value.
         CardView card_msg = (CardView) findViewById(R.id.card_msg); // creating a CardView and assigning a value.
         ImageView logout = (ImageView)findViewById(R.id.iv_logout);
+
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
-               finish();
+                FirebaseUser mFirebaseUser = mAuth.getCurrentUser();
+                if( mFirebaseUser == null ){
+                    activity_dashboard.super.onBackPressed();
+                    finish();
+                    onBackPressed();
+                }
 
             }
         });
