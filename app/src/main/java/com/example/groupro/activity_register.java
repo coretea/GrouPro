@@ -48,13 +48,7 @@ public class activity_register extends AppCompatActivity implements View.OnClick
         btn_signup = (Button)findViewById(R.id.btn_signup);
         btn_signup.setOnClickListener(this);
     }
-
-
-
-    private void register_user(String email, String name, String pass, long numUsers) {
-        User newUser = new User(email, name, pass);
-        myRef.child("users").child("user "+numUsers).setValue(newUser);
-    }
+    
 
     @Override
     public void onClick(View view) {
