@@ -65,15 +65,15 @@ public class activity_register extends AppCompatActivity implements View.OnClick
             et_email.setError("Please enter email id");
             et_email.requestFocus();
         }
-        else  if(pwd.isEmpty()){
+        if(pwd.isEmpty()){
             et_pass.setError("Please enter your password");
             et_pass.requestFocus();
         }
-        else  if(name.isEmpty()){
+        if(name.isEmpty()){
                 et_fullname.setError("Please enter your full name");
                 et_fullname.requestFocus();
         }
-        else  if(!(email.isEmpty() && pwd.isEmpty() && name.isEmpty())){
+        if(!(email.isEmpty() && pwd.isEmpty() && name.isEmpty())){
             mAuth.createUserWithEmailAndPassword(email, pwd).addOnCompleteListener(activity_register.this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
