@@ -58,7 +58,7 @@ public class activity_register extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View view) {
-        String email = et_email.getText().toString();
+        final String email = et_email.getText().toString();
         String pwd = et_pass.getText().toString();
         final String name = et_fullname.getText().toString();
         if(email.isEmpty()){
@@ -81,6 +81,8 @@ public class activity_register extends AppCompatActivity implements View.OnClick
                         Toast.makeText(activity_register.this,"Sign Up was unsuccessful, Please Try Again",Toast.LENGTH_SHORT).show();
                     }
                     else {
+                        User user = new User(email, name, mAuth.getUid());
+                        user.addUserToDB(user);
                         Toast.makeText(activity_register.this,"Welcome, "+name,Toast.LENGTH_SHORT).show();
                         finish();
                         onBackPressed();
