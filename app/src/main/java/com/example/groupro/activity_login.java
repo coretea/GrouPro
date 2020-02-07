@@ -45,12 +45,12 @@ public class activity_login extends AppCompatActivity implements View.OnClickLis
 
        mAuth = FirebaseAuth.getInstance();
 
-        et_email = (EditText)findViewById(R.id.et_email);
-        et_pass = (EditText)findViewById(R.id.et_pass);
-        btn_signup = (Button) findViewById(R.id.btn_signup);
+        et_email = findViewById(R.id.et_email);
+        et_pass = findViewById(R.id.et_pass);
+        btn_signup = findViewById(R.id.btn_signup);
         btn_signup.setOnClickListener(this);
 
-        btn_login = (Button)findViewById(R.id.btn_login);
+        btn_login = findViewById(R.id.btn_login);
         btn_login.setOnClickListener(this);
 
 

@@ -48,32 +48,26 @@ public class activity_register extends AppCompatActivity implements View.OnClick
         btn_signup = (Button)findViewById(R.id.btn_signup);
         btn_signup.setOnClickListener(this);
     }
-
-
-
-    private void register_user(String email, String name, String pass, long numUsers) {
-        User newUser = new User(email, name, pass);
-        myRef.child("users").child("user "+numUsers).setValue(newUser);
-    }
+    
 
     @Override
     public void onClick(View view) {
-        String email = et_email.getText().toString();
+        final String email = et_email.getText().toString();
         String pwd = et_pass.getText().toString();
         final String name = et_fullname.getText().toString();
         if(email.isEmpty()){
             et_email.setError("Please enter email id");
             et_email.requestFocus();
         }
-        else  if(pwd.isEmpty()){
+        if(pwd.isEmpty()){
             et_pass.setError("Please enter your password");
             et_pass.requestFocus();
         }
-        else  if(name.isEmpty()){
+        if(name.isEmpty()){
                 et_fullname.setError("Please enter your full name");
                 et_fullname.requestFocus();
         }
-        else  if(!(email.isEmpty() && pwd.isEmpty() && name.isEmpty())){
+        if(!(email.isEmpty() && pwd.isEmpty() && name.isEmpty())){
             mAuth.createUserWithEmailAndPassword(email, pwd).addOnCompleteListener(activity_register.this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
@@ -81,6 +75,8 @@ public class activity_register extends AppCompatActivity implements View.OnClick
                         Toast.makeText(activity_register.this,"Sign Up was unsuccessful, Please Try Again",Toast.LENGTH_SHORT).show();
                     }
                     else {
+                        User user = new User(email, name, mAuth.getUid());
+                        user.addUserToDB(user);
                         Toast.makeText(activity_register.this,"Welcome, "+name,Toast.LENGTH_SHORT).show();
                         finish();
                         onBackPressed();
