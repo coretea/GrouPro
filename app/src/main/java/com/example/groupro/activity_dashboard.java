@@ -26,12 +26,12 @@ public class activity_dashboard extends AppCompatActivity {
         card_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // do whatever you want to do on click (to launch any fragment or activity you need to put intent here.)
+                Intent intent_profile = new Intent(activity_dashboard.this,activty_profile.class);
+                startActivity(intent_profile);
             }
         });
         mAuth = FirebaseAuth.getInstance();
         CardView card_projects = (CardView) findViewById(R.id.card_projects); // creating a CardView and assigning a value.
-
         CardView card_assignments = (CardView) findViewById(R.id.card_assignments); // creating a CardView and assigning a value.
         CardView card_due = (CardView) findViewById(R.id.card_due); // creating a CardView and assigning a value.
         CardView card_msg = (CardView) findViewById(R.id.card_msg); // creating a CardView and assigning a value.
