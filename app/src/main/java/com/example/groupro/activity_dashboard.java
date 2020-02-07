@@ -26,7 +26,7 @@ public class activity_dashboard extends AppCompatActivity {
         card_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_profile = new Intent(activity_dashboard.this,activty_profile.class);
+                Intent intent_profile = new Intent(activity_dashboard.this,activity_profile.class);
                 startActivity(intent_profile);
             }
         });
