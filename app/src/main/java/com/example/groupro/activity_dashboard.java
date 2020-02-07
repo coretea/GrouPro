@@ -39,13 +39,10 @@ public class activity_dashboard extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                FirebaseUser mFirebaseUser = mAuth.getCurrentUser();
-                if( mFirebaseUser == null ){
-                    activity_dashboard.super.onBackPressed();
-                    finish();
-                    onBackPressed();
-                }
+                mAuth.signOut();
+                finishAffinity();
+                Intent intent_login = new Intent(activity_dashboard.this,activity_login.class);
+                startActivity(intent_login);
 
             }
         });
