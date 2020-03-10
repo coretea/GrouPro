@@ -33,13 +33,14 @@ public class activity_profile extends AppCompatActivity {
         tv_email = (TextView)findViewById(R.id.tv_email);
         tv_name = (TextView)findViewById(R.id.tv_name);
 
+        // gets name and email from DB
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot mainSnapshot) {
 
                 User userProfile = mainSnapshot.getValue(User.class);
-                tv_name.setText(userProfile.getName().toString());
+                tv_name.setText(userProfile.getName());
                 tv_email.setText(userProfile.getEmail());
             }
 
