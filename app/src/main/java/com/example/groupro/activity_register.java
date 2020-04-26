@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -76,6 +77,10 @@ public class activity_register extends AppCompatActivity implements View.OnClick
                     }
                     else {
                         User user = new User(email, name, mAuth.getUid());
+                        // updates profile display name
+                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(name).build();
+                        mAuth.getCurrentUser().updateProfile(profileUpdates);
+                        // adds user to db
                         user.addUserToDB(user);
                         Toast.makeText(activity_register.this,"Welcome, "+name,Toast.LENGTH_SHORT).show();
                         finish();

@@ -32,6 +32,13 @@ public class activity_dashboard extends AppCompatActivity {
         });
         mAuth = FirebaseAuth.getInstance();
         CardView card_projects = (CardView) findViewById(R.id.card_projects); // creating a CardView and assigning a value.
+        card_projects.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent_projects = new Intent(activity_dashboard.this,MyProjects.class);
+                startActivity(intent_projects);
+            }
+        });
         CardView card_assignments = (CardView) findViewById(R.id.card_assignments); // creating a CardView and assigning a value.
         CardView card_due = (CardView) findViewById(R.id.card_due); // creating a CardView and assigning a value.
         CardView card_msg = (CardView) findViewById(R.id.card_msg); // creating a CardView and assigning a value.

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".activity_CreateProject">
+
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="39dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/back" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:text="Create Your New Project"
+        android:textColor="@android:color/background_light"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_projectName"
+        style="@style/Base.Widget.MaterialComponents.TextInputEditText"
+        android:layout_width="291dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@color/cardview_light_background"
+        android:ems="10"
+        android:hint="Project Name"
+        android:inputType="textPersonName"
+        android:selectAllOnFocus="true"
+        android:singleLine="false"
+        android:textColor="@android:color/background_light"
+        android:textColorHint="@android:color/background_light"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+    <RadioGroup
+        android:id="@+id/rg_status"
+        android:layout_width="350dp"
+        android:layout_height="94dp"
+        android:textColor="@android:color/background_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.573"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_projectName"
+        app:layout_constraintVertical_bias="0.072">
+
+        <RadioButton
+            android:id="@+id/rb_private"
+            style="@android:style/Widget.DeviceDefault.Light.CompoundButton.RadioButton"
+            android:layout_width="match_parent"
+            android:layout_height="47dp"
+            android:backgroundTint="@color/cardview_light_background"
+            android:text="Private (Invite Only)"
+            android:textColor="@android:color/background_light" />
+
+        <RadioButton
+            android:id="@+id/rb_public"
+            android:layout_width="match_parent"
+            style="@android:style/Widget.DeviceDefault.Light.CompoundButton.RadioButton"
+            android:layout_height="47dp"
+            android:text="Public (Open)"
+            android:textColor="@android:color/background_light" />
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/et_desc"
+        android:layout_width="312dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="@color/cardview_light_background"
+        android:ems="10"
+        android:gravity="clip_vertical"
+        android:hint="Tell us about your project..."
+        android:inputType="textPersonName"
+        android:textColor="@android:color/background_light"
+        android:textColorHint="@android:color/background_light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.353"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rg_status" />
+
+    <TextView
+        android:id="@+id/tv_budgetitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="42dp"
+        android:text="Is there a budget limit?"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_desc" />
+
+    <Button
+        android:id="@+id/btn_continue"
+        android:layout_width="165dp"
+        android:layout_height="54dp"
+        android:layout_marginBottom="136dp"
+        android:background="@drawable/buttonstyle"
+        android:shadowColor="#A8A8A8"
+        android:text="Continue"
+        android:textColor="#FFFFFFFF"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_budget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SET"
+        app:layout_constraintBottom_toTopOf="@+id/btn_continue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_budgetitle"
+        app:layout_constraintVertical_bias="0.272" />
+</androidx.constraintlayout.widget.ConstraintLayout>

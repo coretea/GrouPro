@@ -1,7 +1,12 @@
 package com.example.groupro;
 
+import android.util.Log;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -11,21 +16,29 @@ public class Project {
 
     private String name;
     private  String manager;
-    private double budget;
+    private int budget;
     ArrayList<String> users = new ArrayList<String>();
-    public Calendar calendar = Calendar.getInstance();
     private String creationDate;
     private ArrayList<Assignment> assignments;
+    private String status;
+    private String description;
 
-
-    public Project(String name,String manager, double budget, ArrayList<String> users)
+    public Project()
     {
+        //empty constructor
+    }
+
+    public Project(String name,String manager, int budget, ArrayList<String> users, String status, String description)
+    {
+        this.status = status;
+        Calendar calendar = Calendar.getInstance();
         this.creationDate =  DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
         this.name = name;
         this.manager = manager;
         this.budget = budget;
         this.users = users;
         assignments = new ArrayList<Assignment>();
+        this.description = description;
     }
 
     // getters and setters
@@ -44,7 +57,7 @@ public class Project {
     public double getBudget() {
         return budget;
     }
-    public void setBudget(double budget) {
+    public void setBudget(int budget) {
         this.budget = budget;
     }
     public ArrayList<String> getUsers() {
@@ -65,6 +78,19 @@ public class Project {
     public void setAssignments(ArrayList<Assignment> assignments) {
         this.assignments = assignments;
     }
+    public String getStatus() {
+        return status;
+    }
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    public String getDescription() {
+        return description;
+    }
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
 
     // adds project to database
     public void addProjectToDB(Project proj)
@@ -84,5 +110,6 @@ public class Project {
         assignments.remove(asm);
     }
 
-
 }
+
+

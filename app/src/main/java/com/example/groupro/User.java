@@ -1,9 +1,16 @@
 package com.example.groupro;
 
+import android.util.Log;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-public class User {
+import java.util.ArrayList;
+
+public class User{
     private String name;
     private String email;
     private String uid;
@@ -37,9 +44,37 @@ public class User {
 
     public String getUid() { return this.uid; }
 
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+
     public void addUserToDB(User user)
     {
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("users");
         mDatabase.child(user.getUid() ).setValue(user);
+    }
+
+   static public ArrayList<User> getUserList()
+    {
+        final ArrayList<User> userlist = new ArrayList<User>();
+
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("users");
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
+                        userlist.add(singleSnapshot.getValue(User.class));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        return userlist;
     }
 }
