@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -26,6 +27,7 @@ public class MyProjects extends AppCompatActivity {
     ListView lv_projects;
     List list = new ArrayList();
     ArrayAdapter adapter;
+    final ArrayList<Project> user_projects = new ArrayList<Project>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +67,7 @@ public class MyProjects extends AppCompatActivity {
                     list.add(show);
                     adapter = new ArrayAdapter<String>(MyProjects.this, android.R.layout.simple_list_item_1, list);
                     lv_projects.setAdapter(adapter);
+                    user_projects.add(value);
 
                 }
             }
@@ -89,6 +92,17 @@ public class MyProjects extends AppCompatActivity {
 
             }
         });
+
+
+        lv_projects.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i =  new Intent(MyProjects.this, activity_project.class);
+                i.putExtra("Project", user_projects.get(position));
+                startActivity(i);
+            }
+        });
+
 
     }
 
