@@ -7,6 +7,11 @@ public class Assignment
     String content;
     String due;
 
+    public Assignment()
+    {
+        //empty constructor
+    }
+
     public Assignment(String asignee, double budget, String content, String due) {
         this.asignee = asignee;
         this.budget = budget;

@@ -3,9 +3,14 @@ package com.example.groupro;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.method.DigitsKeyListener;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -17,11 +22,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-public class activity_project extends AppCompatActivity {
+public class activity_project extends AppCompatActivity implements Assignment_Dialog.AssignmentDialogListener {
 
     ListView lv_projects;
     List list = new ArrayList();
     ArrayAdapter adapter;
+    Assignment assignment = new Assignment();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +48,14 @@ public class activity_project extends AppCompatActivity {
         ImageView iv_back = (ImageView)findViewById(R.id.iv_back);
         ImageView iv_assignments = (ImageView)findViewById(R.id.iv_assignments);
 
+        iv_assignments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDialog();
+            }
+        });
+
+
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,5 +73,15 @@ public class activity_project extends AppCompatActivity {
 
 
 
+    }
+
+    public void openDialog() {
+        Assignment_Dialog exampleDialog = new Assignment_Dialog();
+        exampleDialog.show(getSupportFragmentManager(), "assignment dialog");
+    }
+
+    public Assignment createAssignment(String asignee, String title)
+    {
+        return new Assignment();
     }
 }
