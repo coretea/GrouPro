@@ -1,9 +1,10 @@
 package com.example.groupro;
 
-public class Assignment
+import java.io.Serializable;
+
+public class Assignment implements Serializable
 {
     String asignee;
-    double budget;
     String content;
     String due;
 
@@ -12,9 +13,8 @@ public class Assignment
         //empty constructor
     }
 
-    public Assignment(String asignee, double budget, String content, String due) {
+    public Assignment(String asignee, String content, String due) {
         this.asignee = asignee;
-        this.budget = budget;
         this.content = content;
         this.due = due;
     }
@@ -25,14 +25,6 @@ public class Assignment
 
     public void setAsignee(String asignee) {
         this.asignee = asignee;
-    }
-
-    public double getBudget() {
-        return budget;
-    }
-
-    public void setBudget(double budget) {
-        this.budget = budget;
     }
 
     public String getContent() {

@@ -39,6 +39,8 @@ public class Project implements Serializable {
         this.budget = budget;
         this.users = users;
         assignments = new ArrayList<Assignment>();
+        Assignment asgmt = new Assignment("ExampleUser", "Example", "ExampleDate");
+        assignments.add(asgmt);
         this.description = description;
     }
 

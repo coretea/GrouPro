@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class activity_project extends AppCompatActivity implements Assignment_Dialog.AssignmentDialogListener {
@@ -28,11 +29,12 @@ public class activity_project extends AppCompatActivity implements Assignment_Di
     List list = new ArrayList();
     ArrayAdapter adapter;
     Assignment assignment = new Assignment();
+    static Project project = new Project();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project);
-        Project project = new Project();
         if(getIntent().getExtras() != null) {
             project = (Project) getIntent().getSerializableExtra("Project");
         }
@@ -52,6 +54,7 @@ public class activity_project extends AppCompatActivity implements Assignment_Di
             @Override
             public void onClick(View v) {
                 openDialog();
+
             }
         });
 
@@ -80,8 +83,10 @@ public class activity_project extends AppCompatActivity implements Assignment_Di
         exampleDialog.show(getSupportFragmentManager(), "assignment dialog");
     }
 
-    public Assignment createAssignment(String asignee, String title)
+    public void createAssignment(String asignee, String title, Date due)
     {
-        return new Assignment();
+        assignment = new Assignment(asignee, title, due.toString());
+        project.addAssigment(assignment);
+        project.addProjectToDB(project);
     }
 }
