@@ -84,6 +84,7 @@ public class activity_my_assignments extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
+
             }
         });
 

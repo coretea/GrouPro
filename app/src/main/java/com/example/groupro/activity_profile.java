@@ -1,22 +1,39 @@
 package com.example.groupro;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.storage.StorageManager;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCanceledListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.ByteArrayOutputStream;
 
 public class activity_profile extends AppCompatActivity {
     TextView tv_email;
@@ -38,10 +55,10 @@ public class activity_profile extends AppCompatActivity {
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot mainSnapshot) {
-
                 User userProfile = mainSnapshot.getValue(User.class);
                 tv_name.setText(userProfile.getName());
                 tv_email.setText(userProfile.getEmail());
+                Glide.with(activity_profile.this).load(user.getPhotoUrl()).into(iv_profile);
             }
 
             @Override
@@ -54,6 +71,19 @@ public class activity_profile extends AppCompatActivity {
 
 
         iv_profile = (ImageView)findViewById(R.id.iv_profile);
+        iv_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (intent.resolveActivity(getPackageManager()) != null)
+                {
+                    startActivityForResult(intent, 1910);
+                }
+            }
+        });
+
+
+
         iv_back = (ImageView)findViewById(R.id.iv_back);
 
         iv_back.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +98,80 @@ public class activity_profile extends AppCompatActivity {
 
 
 
+// ---------------------------- funcs ----------------------------------------------------
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1910)
+        {
+            switch (resultCode)
+            {
+                case RESULT_OK:
+                    Bitmap bitmap = (Bitmap)data.getExtras().get("data");
+                    iv_profile.setImageBitmap(bitmap);
+                    upload_pic(bitmap);
+                    break;
+                default:
+                    Toast.makeText(activity_profile.this, "Profile Picture Update Failed!", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+    }
+
+
+    private void upload_pic (Bitmap bitmap)
+    {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+
+        final StorageReference store_ref = FirebaseStorage.getInstance().getReference()
+                    .child("profileImages")
+                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid()+ ".jpeg");
+        store_ref.putBytes(baos.toByteArray()).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                getDownloadUrl(store_ref);
+            }
+        }).addOnCanceledListener(new OnCanceledListener() {
+            @Override
+            public void onCanceled() {
+                Toast.makeText(activity_profile.this, "Profile Picture Update Failed!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
+
+    private void getDownloadUrl(StorageReference store_ref)
+    {
+        store_ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                setUserProfile(uri);
+            }
+        });
+    }
+
+    private void setUserProfile(Uri uri)
+    {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        UserProfileChangeRequest request = new UserProfileChangeRequest.Builder()
+                .setPhotoUri(uri)
+                .build();
+        user.updateProfile(request).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(activity_profile.this, "Profile Picture Updated!", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(activity_profile.this, "Profile Picture Update Failed!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
 
 
 }
