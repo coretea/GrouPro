@@ -13,7 +13,9 @@ import android.os.storage.StorageManager;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +26,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,6 +37,8 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class activity_profile extends AppCompatActivity {
     TextView tv_email;
@@ -41,6 +46,10 @@ public class activity_profile extends AppCompatActivity {
     ImageView iv_profile;
     ImageView iv_back;
     FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+    ListView lv_projects;
+    List list = new ArrayList();
+    ArrayAdapter adapter;
+    final ArrayList<Project> user_projects = new ArrayList<Project>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,12 +72,10 @@ public class activity_profile extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                //
+
             }
 
         });
-
-
 
         iv_profile = (ImageView)findViewById(R.id.iv_profile);
         iv_profile.setOnClickListener(new View.OnClickListener() {
@@ -82,15 +89,52 @@ public class activity_profile extends AppCompatActivity {
             }
         });
 
-
-
         iv_back = (ImageView)findViewById(R.id.iv_back);
-
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
                 onBackPressed();
+            }
+        });
+
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("projects");
+        // show list
+        lv_projects = (ListView)findViewById(R.id.lv_projects);
+        databaseReference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Project value=dataSnapshot.getValue(Project.class);
+                if (value.getUsers().indexOf(FirebaseAuth.getInstance().getCurrentUser().getDisplayName()) != -1 && value.getStatus().equals("Public"))
+                {
+                    String show = "   "+value.getName()+"\n   Manager: "+value.getManager();
+                    list.add(show);
+                    adapter = new ArrayAdapter<String>(activity_profile.this, R.layout.simple_list_item_1, list);
+                    lv_projects.setAdapter(adapter);
+                    user_projects.add(value);
+
+                }
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         });
     }
