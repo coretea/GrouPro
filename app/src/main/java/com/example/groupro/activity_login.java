@@ -1,11 +1,15 @@
 package com.example.groupro;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.IntentSender;
 import android.view.View;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import android.os.Bundle;
 import android.widget.EditText;
@@ -40,6 +44,8 @@ public class activity_login extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        startService(new Intent(this, BatteryService.class));
+
         db = FirebaseDatabase.getInstance();
         myRef = db.getReference();
 
@@ -67,8 +73,8 @@ public class activity_login extends AppCompatActivity implements View.OnClickLis
             }
         };
 
-    }
 
+    }
 
     @Override
     protected void onStart() {
