@@ -63,9 +63,9 @@ public class MyProjects extends AppCompatActivity {
                 Project value=dataSnapshot.getValue(Project.class);
                 if (value.getUsers().indexOf(mAuth.getCurrentUser().getDisplayName()) != -1)
                 {
-                    String show = value.getName()+"\nManager: "+value.getManager();
+                    String show = "   "+value.getName()+"\n   Manager: "+value.getManager();
                     list.add(show);
-                    adapter = new ArrayAdapter<String>(MyProjects.this, android.R.layout.simple_list_item_1, list);
+                    adapter = new ArrayAdapter<String>(MyProjects.this, R.layout.simple_list_item_1, list);
                     lv_projects.setAdapter(adapter);
                     user_projects.add(value);
 

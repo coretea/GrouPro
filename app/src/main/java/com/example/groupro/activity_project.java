@@ -72,7 +72,7 @@ public class activity_project extends AppCompatActivity implements Assignment_Di
         tv_manager.setText(project.getManager());
         tv_name.setText(project.getName());
 
-
+        
 
 
 

@@ -56,9 +56,9 @@ public class activity_my_assignments extends AppCompatActivity {
                     Assignment asn = proj_assignments.get(i);
                     if (mAuth.getCurrentUser().getEmail().equals(asn.asignee))
                     {
-                        String show = asn.getContent()+"\nDue: "+asn.getDue().substring(0, (asn.getDue().length()- 17));
+                        String show = "   "+asn.getContent()+"\n   Due: "+asn.getDue().substring(0, (asn.getDue().length()- 17));
                         list.add(show);
-                        adapter = new ArrayAdapter<String>(activity_my_assignments.this, android.R.layout.simple_list_item_1, list);
+                        adapter = new ArrayAdapter<String>(activity_my_assignments.this, R.layout.simple_list_item_1, list);
                         lv_assignments.setAdapter(adapter);
                         user_assignments.add(asn);
                     }
