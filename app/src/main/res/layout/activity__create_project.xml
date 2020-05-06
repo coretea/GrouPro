@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context=".activity_CreateProject">
+    tools:context="com.groupro.groupro.activity_CreateProject">
 
     <ImageView
         android:id="@+id/iv_back"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.groupro">
+    package="com.groupro.groupro">
     <uses-permission android:name="android.permission.READ_CALENDAR"/>
     <uses-permission android:name="android.permission.WRITE_CALENDAR"/>
 
@@ -11,23 +11,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity_my_assignments"></activity>
-        <activity android:name=".activity_project" />
-        <activity android:name=".activity_CreateProject" />
-        <activity android:name=".MyProjects" />
-        <activity android:name=".activity_profile" />
-        <activity android:name=".activity_dashboard" />
-        <activity android:name=".activity_login">
+        <activity android:name="com.groupro.groupro.activity_my_assignments"></activity>
+        <activity android:name="com.groupro.groupro.activity_project" />
+        <activity android:name="com.groupro.groupro.activity_CreateProject" />
+        <activity android:name="com.groupro.groupro.MyProjects" />
+        <activity android:name="com.groupro.groupro.activity_profile" />
+        <activity android:name="com.groupro.groupro.activity_dashboard" />
+        <activity android:name="com.groupro.groupro.activity_login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity_register" />
+        <activity android:name="com.groupro.groupro.activity_register" />
 
-        <service android:name=".BatteryService" />
-        <receiver android:name=".BatteryChangeReceiver" />
+        <service android:name="com.groupro.groupro.BatteryService" />
+        <receiver android:name="com.groupro.groupro.BatteryChangeReceiver" />
     </application>
 
 </manifest>

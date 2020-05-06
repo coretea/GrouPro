@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context=".activity_my_assignments">
+    tools:context="com.groupro.groupro.activity_my_assignments">
 
     <TextView
         android:id="@+id/tv_myassignments"
