@@ -11,12 +11,7 @@ import androidx.fragment.app.Fragment;
 
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link dialog_budget.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link dialog_budget#newInstance} factory method to
- * create an instance of this fragment.
+ * this class is the budget dialog based on Fragment
  */
 public class dialog_budget extends Fragment {
     // TODO: Rename parameter arguments, choose names that match

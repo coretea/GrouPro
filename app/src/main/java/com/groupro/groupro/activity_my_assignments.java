@@ -18,6 +18,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * this activity shows the user the activity which he is assigned for.
+ */
 public class activity_my_assignments extends AppCompatActivity {
 
     ListView lv_assignments;

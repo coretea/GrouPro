@@ -2,6 +2,10 @@ package com.groupro.groupro;
 
 import java.io.Serializable;
 
+/**
+ * this class represents an Assignment inside a project.
+ *  Each project has a List of Assignment
+ */
 public class Assignment implements Serializable
 {
     String asignee;
@@ -13,12 +17,20 @@ public class Assignment implements Serializable
         //empty constructor
     }
 
+    /**
+     * A constructor to Assignments
+     * @param asignee
+     * @param content
+     * @param due
+     */
     public Assignment(String asignee, String content, String due) {
         this.asignee = asignee;
         this.content = content;
         this.due = due;
     }
 
+    // getters and setters
+    
     public String getAsignee() {
         return asignee;
     }

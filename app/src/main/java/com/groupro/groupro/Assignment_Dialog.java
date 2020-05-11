@@ -19,7 +19,9 @@ import androidx.fragment.app.DialogFragment;
 import java.util.Calendar;
 import java.util.Date;
 
-
+/**
+ * This class is an Assignment creator dialog based on dialog fragment
+ */
 public class Assignment_Dialog extends AppCompatDialogFragment {
     private EditText editAssignee;
     private EditText editTitle;
@@ -78,11 +80,17 @@ public class Assignment_Dialog extends AppCompatDialogFragment {
         }
     }
 
+    /**
+     * Interface that requires implementation for creating an assignment after calling the dialog
+     */
     public interface AssignmentDialogListener {
         void createAssignment(String asignee, String title, Date due);
 
     }
 
+    /**
+     * this class is the date picker mini-dialog fragment
+     */
     public static class DatePickerFragment extends DialogFragment
             implements DatePickerDialog.OnDateSetListener {
 

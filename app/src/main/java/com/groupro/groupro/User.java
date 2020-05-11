@@ -8,6 +8,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+/**
+ * this class represents a user in the database and in projects.
+ */
 public class User{
     private String name;
     private String email;
@@ -18,11 +21,19 @@ public class User{
     // empty constructor
     }
 
+    /**
+     * a constructor to a User
+     * @param email
+     * @param name
+     * @param uid
+     */
     public User(String email, String name, String uid) {
         this.email = email;
         this.name = name;
         this.uid = uid;
     }
+
+    // setters and getters
 
     public void setEmail(String email){
         this.email = email;
@@ -46,13 +57,20 @@ public class User{
         this.uid = uid;
     }
 
-
+    /**
+     * This function adds user to the DB
+     * @param user
+     */
     public void addUserToDB(User user)
     {
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("users");
         mDatabase.child(user.getUid() ).setValue(user);
     }
 
+    /**
+     * this function returns an ArrayList with the user list
+     * @return
+     */
    static public ArrayList<User> getUserList()
     {
         final ArrayList<User> userlist = new ArrayList<User>();

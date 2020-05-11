@@ -8,6 +8,9 @@ import android.os.IBinder;
 
 import androidx.annotation.Nullable;
 
+/**
+ * this Service is started when the app has started and listening with the broadcast receiver to the battery and power status
+ */
 @SuppressLint("Registered")
 public class BatteryService extends Service {
 

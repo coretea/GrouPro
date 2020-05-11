@@ -20,9 +20,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * this activity class is for My_projects page. it shows the user's projects (Managed by him or he is included ub them)
+ */
 public class MyProjects extends AppCompatActivity {
-
-
 
     ListView lv_projects;
     List list = new ArrayList();

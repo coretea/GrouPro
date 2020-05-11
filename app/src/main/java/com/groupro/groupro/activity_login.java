@@ -18,6 +18,11 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+/**
+ * this is the first activity of the app.
+ * If you can't log in you can go to the register activity.
+ * if connected successfully this leads to the dashboard.
+ */
 public class activity_login extends AppCompatActivity implements View.OnClickListener {
 
     FirebaseDatabase db;

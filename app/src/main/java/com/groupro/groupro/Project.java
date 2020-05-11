@@ -8,6 +8,9 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+/**
+* this activity represents the Project in the app and in the Database
+*/
 public class Project implements Serializable {
 
     private String name;
@@ -24,6 +27,15 @@ public class Project implements Serializable {
         //empty constructor
     }
 
+    /**
+     * A constructor for Project object
+     * @param name
+     * @param manager
+     * @param budget
+     * @param users
+     * @param status
+     * @param description
+     */
     public Project(String name,String manager, int budget, ArrayList<String> users, String status, String description)
     {
         this.status = status;
@@ -40,6 +52,7 @@ public class Project implements Serializable {
     }
 
     // getters and setters
+
     public String getName() {
         return name;
     }
@@ -90,19 +103,29 @@ public class Project implements Serializable {
     }
 
 
-    // adds project to database
+    /**
+     * this function adds the project to the Database
+     * @param proj
+     */
     public void addProjectToDB(Project proj)
     {
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("projects");
         mDatabase.child(proj.getName()).setValue(proj);
     }
 
-    // add an assignments
+    /**
+     * this function adds an assignment to the list
+     * @param asm
+     */
     public void addAssigment(Assignment asm)
     {
         assignments.add(asm);
     }
-    //remove assigment
+
+    /**
+     * this function removes an assignment from the list
+     * @param asm
+     */
     public void removeAssigment(Assignment asm)
     {
         assignments.remove(asm);

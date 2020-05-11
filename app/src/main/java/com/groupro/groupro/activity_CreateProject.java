@@ -1,7 +1,5 @@
 package com.groupro.groupro;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -14,11 +12,17 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.groupro.groupro.R;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
+/**
+ * This activity class is for creating a project.
+ * in this activity a user can create a project with different details and budgets.
+ *
+ */
 public class activity_CreateProject extends AppCompatActivity {
     String status = "";
     int budget = 0;
@@ -85,6 +89,10 @@ public class activity_CreateProject extends AppCompatActivity {
 
     }
 
+    /**
+     * this function shows the budget picker dialog for creating a project.
+     * @param c
+     */
     private void showBudgetDialog(Context c) {
         final EditText taskEditText = new EditText(c);
         taskEditText.setKeyListener(DigitsKeyListener.getInstance(null, false, true));  //  positive decimal numbers

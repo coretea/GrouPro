@@ -18,6 +18,9 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+/**
+ * This activitys is for registering and creating an account for my app
+ */
 public class activity_register extends AppCompatActivity implements View.OnClickListener {
     FirebaseDatabase db;
     DatabaseReference myRef;

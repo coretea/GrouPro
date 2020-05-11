@@ -29,6 +29,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+/**
+* the Dashboard activity is a workflow activity with many shortcuts and menus for the user
+*/
 public class activity_dashboard extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
@@ -158,6 +161,11 @@ public class activity_dashboard extends AppCompatActivity {
 
     }
 
+    /**
+     * this function sorts the map of assignments by dates in order to show them correctly in the Due Soon card in the dashboard.
+     * @param unsortMap
+     * @return
+     */
     public static HashMap<String,Date> sortByComparator(HashMap<String,Date> unsortMap) {
 
         List<Map.Entry<String,Date>> list = new LinkedList<Map.Entry<String,Date>>(unsortMap.entrySet());

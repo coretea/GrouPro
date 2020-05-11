@@ -17,6 +17,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * this activity visualizes the project page for the user.
+ * Here you can see the budget, the manager, the project description and the assignments assigned to this project.
+ */
 public class activity_project extends AppCompatActivity implements Assignment_Dialog.AssignmentDialogListener {
 
     List list = new ArrayList();
@@ -80,11 +84,20 @@ public class activity_project extends AppCompatActivity implements Assignment_Di
 
     }
 
+    /**
+     * this function open the assignment creator dialog
+     */
     public void openDialog() {
         Assignment_Dialog exampleDialog = new Assignment_Dialog();
         exampleDialog.show(getSupportFragmentManager(), "assignment dialog");
     }
 
+    /**
+     * this function creates an assignment and adds it to the list of assignments and to the project assigned to
+     * @param asignee
+     * @param title
+     * @param due
+     */
     public void createAssignment(String asignee, String title, Date due)
     {
         assignment = new Assignment(asignee, title, due.toString());

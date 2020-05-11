@@ -37,6 +37,9 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+* this activity visualizes the user profile for the user
+*/
 public class activity_profile extends AppCompatActivity {
     TextView tv_email;
     TextView tv_name;
@@ -140,6 +143,14 @@ public class activity_profile extends AppCompatActivity {
 
 
 // ---------------------------- funcs ----------------------------------------------------
+
+    /**
+     * when clicking the profile picture the camera will pop up and it will call this function.
+     * this function checks the integrity of the action.
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -160,6 +171,10 @@ public class activity_profile extends AppCompatActivity {
     }
 
 
+    /**
+     * if the action is successful it will upload thew new picture to the firestore in the firebase console
+     * @param bitmap
+     */
     private void upload_pic (Bitmap bitmap)
     {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -183,6 +198,10 @@ public class activity_profile extends AppCompatActivity {
 
     }
 
+    /**
+     * we use this function to get the download url and set the new profile pic
+     * @param store_ref
+     */
     private void getDownloadUrl(StorageReference store_ref)
     {
         store_ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -193,6 +212,10 @@ public class activity_profile extends AppCompatActivity {
         });
     }
 
+    /**
+     * this function gets the download url and sets the new profile picture
+     * @param uri
+     */
     private void setUserProfile(Uri uri)
     {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
